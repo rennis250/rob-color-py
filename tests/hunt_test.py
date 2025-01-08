@@ -1,8 +1,8 @@
-import numpy as np
 import colour
+import numpy as np
 
-from robsblobs.hunt import hunt_brightness
-from robsblobs.cie_standard import XYZ2xy
+from rob_color_py.cie_standard import XYZ2xy
+from rob_color_py.hunt import hunt_brightness
 
 # Table 12.3 Example Hunt color appearance model calculations
 # Quantity Case 1 Case 2 Case 3 Case 4
@@ -25,6 +25,7 @@ Js = [42.12, 66.76, 19.56, 40.27]
 C94s = [0.16, 63.89, 74.58, 73.84]
 M94s = [0.16, 58.28, 76.33, 67.35]
 
+
 def test_hunt():
     for tc in range(4):
         X = Xs[tc]
@@ -40,29 +41,31 @@ def test_hunt():
 
         xy_illum = XYZ2xy(np.array([XW, YW, ZW]))
         Y_illum = LAs[tc]
-        
+
         xy_stim = XYZ2xy(np.array([X, Y, Z]))
-        Yref_stim = Y/LAs[tc]
-        
+        Yref_stim = Y / LAs[tc]
+
         # assumptions about background and adapt
-        # from Fairchild 
+        # from Fairchild
         xy_adapt = XYZ2xy(np.array([XW, YW, ZW]))
         Yref_adapt = 0.20
-        
+
         xy_bkgd = XYZ2xy(np.array([XW, YW, ZW]))
         Yref_bkgd = 0.20
 
         discount = Discounting[tc]
 
-        XYZ = np.array([X, Y, Z]) 
+        XYZ = np.array([X, Y, Z])
         XYZ_w = np.array([XW, YW, ZW])
-        XYZ_b = np.array([XW, 0.20*YW, ZW])
+        XYZ_b = np.array([XW, 0.20 * YW, ZW])
         L_A = Y_illum
         T = colour.temperature.xy_to_CCT(xy_illum, "Hernandez 1999")
 
         # res = hunt_brightness(xy_stim, Yref_stim, xy_illum, Y_illum, xy_adapt, Yref_adapt, xy_bkgd, Yref_bkgd, Nc, Nb, discount, False)
-        res = hunt_brightness(XYZ, XYZ_w, L_A, np.array([0, 0, 0]), XYZ_b, Nc, Nb, discount, False)
-        res_Q = res['Q']
+        res = hunt_brightness(
+            XYZ, XYZ_w, L_A, np.array([0, 0, 0]), XYZ_b, Nc, Nb, discount, False
+        )
+        res_Q = res["Q"]
         # res_WB = res['WB']
 
         # res_col = colour.appearance.hunt.XYZ_to_Hunt(XYZ, XYZ_w, XYZ_b, L_A, CCT_w=T, discount_illuminant=discount)

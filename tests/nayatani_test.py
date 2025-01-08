@@ -1,8 +1,9 @@
 import numpy as np
-# import colour
 
-from robsblobs.nayatani_insanity import robNT
-from robsblobs.cie_standard import XYZ2xy
+from rob_color_py.cie_standard import XYZ2xy
+
+# import colour
+from rob_color_py.nayatani_insanity import robNT
 
 # Table 11.1 Example Nayatani et al. color appearance model calculations
 # Quantity Case 1 Case 2 Case 3 Case 4
@@ -36,6 +37,7 @@ Cs = [0.01, 48.3, 49.3, 39.9]
 # # for the first test
 Ms = [0.02, 42.9, 62.1, 35.8]
 
+
 def test_nayatani():
     for tc in range(4):
         X = Xs[tc]
@@ -50,7 +52,7 @@ def test_nayatani():
         Eor = Eors[tc]
 
         xy_stim = XYZ2xy(np.array([X, Y, Z]))
-        Y_stim = Y/Eo
+        Y_stim = Y / Eo
         # Y_stim = Y/Yn
         # Yo_bg = Yn/Eo
         # the color-science package somehow determined that it is 20%?
@@ -61,13 +63,13 @@ def test_nayatani():
         xy_illum = XYZ2xy(np.array([Xn, Yn, Zn]))
 
         res = robNT(xy_stim, Y_stim, Yo_bg, xy_illum, Eo, Eor)
-        res_Br = res['Brightness']
-        res_Lp = res['Lightness']
-        res_Ln = res['Normalized Lightness']
-        res_theta = res['Hue Angle']
-        res_S = res['Saturation']
-        res_C = res['Chroma']
-        res_M = res['Colorfulness']
+        res_Br = res["Brightness"]
+        res_Lp = res["Lightness"]
+        res_Ln = res["Normalized Lightness"]
+        res_theta = res["Hue Angle"]
+        res_S = res["Saturation"]
+        res_C = res["Chroma"]
+        res_M = res["Colorfulness"]
 
         # XYZ = np.array([X, Y, Z])
         # XYZ_n = np.array([Xn, Yn, Zn])

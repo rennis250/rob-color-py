@@ -1,7 +1,7 @@
 import numpy as np
-# import colour
 
-from robsblobs.atd95 import guth_atd
+# import colour
+from rob_color_py.atd95 import guth_atd
 
 # Table 14.1 Example ATD color vision model calculations
 # Quantity Case 1 Case 2 Case 3 Case 4
@@ -11,7 +11,7 @@ Zs = [21.78, 31.96, 2.14, 21.78]
 Xos = [95.05, 95.05, 109.85, 109.85]
 Yos = [100.00, 100.00, 100.00, 100.00]
 Zos = [108.88, 108.88, 35.58, 35.58]
-Yos_abs = [318.31, 31.83, 318.31, 31.83] # (cd/m2)
+Yos_abs = [318.31, 31.83, 318.31, 31.83]  # (cd/m2)
 sigmas = [300, 300, 300, 300]
 k1s = [0.0, 0.0, 0.0, 0.0]
 k2s = [50.0, 50.0, 50.0, 50.0]
@@ -24,6 +24,7 @@ D2s = [0.0108, 0.0005, 0.0044, 0.0130]
 Brs = [0.1814, 0.2142, 0.1075, 0.1466]
 Cs = [1.206, 1.371, 0.436, 1.091]
 Hs = [1.91, 63.96, -0.31, 0.79]
+
 
 def test_atd95():
     for tc in range(len(Xs)):

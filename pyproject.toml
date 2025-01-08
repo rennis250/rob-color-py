@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "robsblobs"
+name = "rob-color-py"
 version = "0.1.1"
 description = ""
 authors = ["Robert Ennis <Robert.Ennis@psychol.uni-giessen.de>"]
